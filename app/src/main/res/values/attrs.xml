@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ItemInGridView">
+        <attr name="android:drawable" />
+        <attr name="highlight_color" format="color" />
+    </declare-styleable>
+
+
+
+
+    <declare-styleable name="BackpackNavBar">
+        <attr name="drawable1" format="reference"  />
+        <attr name="drawable2" format="reference"  />
+        <attr name="drawable3" format="reference"  />
+        <attr name="selected" format="integer" />
+        <attr name="baseColor" format="color"  />
+        <attr name="highlightedColor" format="color"  />
+    </declare-styleable>
+
+</resources>

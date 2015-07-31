@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:id="@+id/topLevelLayout"
+    android:background="#FFF"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/primary_darker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/MyPopupMenu">
+    </android.support.v7.widget.Toolbar>
+
+    <!--<com.markshoe.stashapp.CustomViews.BackpackNavBar-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/bp_nav_bar"-->
+        <!--app:drawable1="@drawable/noun_grid_10564"-->
+        <!--app:drawable2="@drawable/noun_list_10282"-->
+        <!--app:drawable3="@drawable/noun_map_marker_17417"-->
+        <!--app:baseColor="@color/black"-->
+        <!--app:selected="2"-->
+        <!--app:highlightedColor="@color/primary_dark"-->
+    <!--/>-->
+
+    <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+    <LinearLayout
+        android:focusable="true" android:focusableInTouchMode="true"
+        android:layout_width="0px" android:layout_height="0px"/>
+
+    <include layout="@layout/search_bar_layout"/>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!--<LinearLayout-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:id="@+id/backpack_card"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="35dp"-->
+        <!--android:orientation="vertical"-->
+        <!--android:weightSum="1">-->
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:background="@color/primary_dark"-->
+            <!--android:layout_height="40dp">-->
+
+            <!--<FrameLayout-->
+                <!--android:padding="10dp"-->
+                <!--android:id="@+id/back_button"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:id="@+id/back_arrow"-->
+                    <!--android:src="@drawable/ic_arrow_back_black_24dp"-->
+                    <!--android:layout_width="28dp"-->
+                    <!--android:layout_height="28dp" />-->
+            <!--</FrameLayout>-->
+
+
+
+            <!--<ImageView-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:id="@+id/bag_image"-->
+                <!--android:layout_toRightOf="@id/back_button"-->
+                <!--android:layout_height="24dp"-->
+                <!--android:layout_width="24dp"-->
+                <!--android:src="@drawable/backpack"-->
+                <!--/>-->
+
+
+            <!--<TextView-->
+                <!--android:layout_toRightOf="@id/bag_image"-->
+                <!--android:paddingLeft= "2dp"-->
+                <!--android:id="@+id/bptext"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:textSize="22dp"-->
+                <!--android:fontFamily="sans-serif-thin"-->
+                <!--android:textStyle="normal"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:text="Main Backpack"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"/>-->
+
+            <!--<FrameLayout-->
+                <!--android:padding="10dp"-->
+                <!--android:id="@+id/out_of_bp_overflow_button"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:src="@drawable/ic_more_vert_white_36dp"-->
+                    <!--android:layout_width="28dp"-->
+                    <!--android:layout_height="28dp" />-->
+            <!--</FrameLayout>-->
+
+        <!--</RelativeLayout>-->
+
+
+    <!--</LinearLayout>-->
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,3 @@
+include ':app' ,':materialviewpager',  ':PagerSlidingTabStrip'
+project(':materialviewpager').projectDir = new File('libs/materialviewpager')
+project(':PagerSlidingTabStrip').projectDir = new File('libs/PagerSlidingTabStrip')

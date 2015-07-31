@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="5dp"
+    android:id="@+id/backpack_card"
+    android:layout_width="match_parent"
+    android:layout_height="280dp"
+    android:background="@drawable/backpack_background_white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/backpack_background_primary_no_border"
+        android:layout_height="40dp">
+
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:paddingLeft= "12dp"
+            android:gravity="center_vertical"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-thin"
+            android:textStyle="normal"
+            android:textColor="@color/white"
+            android:text="Unassigned items"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/backpack_name" />
+
+        <FrameLayout
+            android:background="@drawable/ripple_white_on_primary"
+            android:padding="10dp"
+            android:id="@+id/out_of_bp_overflow_button"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/ic_more_vert_white_36dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+        </FrameLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/bag_frame"
+            android:paddingTop="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_marginBottom="46dp">
+
+            <ImageView
+                android:id="@+id/bag_icon"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/out_of_bag_map_image" />
+
+        </FrameLayout>
+
+
+        <TextView
+            android:paddingTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:fontFamily="sans-serif-thin"
+            android:textStyle="normal"
+            android:textColor="@color/grey_1000"
+            android:text="Currently 24 items outside of bags "
+            android:id="@+id/item_info_text"
+            android:layout_above="@+id/view_contents_button"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:background="@drawable/ripple_grey"
+            android:id="@+id/view_contents_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:padding="10dp"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textColor="@color/primary_dark"
+            android:text="View Items and Locations"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

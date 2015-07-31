@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/grey_1000"
+        android:text="Step 2 of 3:"
+        />
+
+    <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+    <LinearLayout
+        android:focusable="true" android:focusableInTouchMode="true"
+        android:layout_width="0px" android:layout_height="0px"/>
+
+    <LinearLayout
+        android:padding="8dp"
+        android:layout_below="@id/title_bar"
+        android:id="@+id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:textCursorDrawable="@drawable/text_cursor_primary"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/edit_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Item Name"
+            android:textSize="16sp"
+            app:met_floatingLabelTextSize="16dp"
+            app:met_primaryColor="@color/primary_dark"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="15"
+            app:met_singleLineEllipsis="true"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shoebag="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="2dp"
+    android:layout_height="70dp">
+
+    <FrameLayout
+        android:id="@+id/icon_frame"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:paddingEnd="20dp"
+        android:paddingStart="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp">
+        <FrameLayout
+            android:id="@+id/icon_frame_inner"
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+            <com.markshoe.stashapp.CustomViews.HighlightedDrawable
+                android:id="@+id/highlighted_drawable"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawable="@drawable/personal"
+                shoebag:highlight_color="@android:color/holo_blue_light" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/grey_1000"
+        android:fontFamily="sans-serif-thin"
+        android:textStyle="normal"
+        android:text="Baseball Hat"
+        android:layout_toEndOf="@+id/icon_frame" />
+
+    <LinearLayout
+        android:layout_marginLeft="2dp"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@id/icon_frame"
+        android:layout_below="@id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:id="@+id/location_frame">
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/location_icon"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:alpha="0.6"
+            android:src="@drawable/noun_map_marker_17417"
+            android:layout_above="@+id/view"
+            android:layout_toStartOf="@+id/favorite" />
+
+        <TextView
+            android:id="@+id/location_name"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif-thin"
+            android:textStyle="normal"
+            android:text="Ancaster Ontario" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="2dp"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@id/icon_frame"
+        android:layout_below="@id/location_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:id="@+id/linearLayout">
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/alarm_icon"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:alpha="0.6"
+            android:src="@drawable/alarm_clock_2"
+            android:layout_above="@+id/view"
+            android:layout_toStartOf="@+id/favorite" />
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/alarm_name"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif-thin"
+            android:textStyle="normal"
+            android:textScaleX="1.1"
+            android:text="8:30am Wed" />
+    </LinearLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/transaction_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif-thin"
+        android:textStyle="normal"
+        android:textScaleX="1.1"
+        android:textColor="@color/grey_1000"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:text="9:54pm"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:id="@+id/icon_holder"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true">
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grey_300"
+        android:id="@+id/view" />
+
+    <!--<ImageView-->
+        <!--android:layout_gravity="center"-->
+        <!--android:id="@+id/sticker_color"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginEnd="4dp"-->
+        <!--android:layout_width="14dp"-->
+        <!--android:layout_height="14dp"-->
+        <!--android:src="@drawable/circle"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignEnd="@+id/transaction_time" />-->
+
+
+    <!--<TextView-->
+        <!--android:background="@drawable/ripple_grey"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:id="@+id/get_location_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="12sp"-->
+        <!--android:fontFamily="sans-serif"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textColor="@color/primary_dark"-->
+        <!--android:text="Get Location"-->
+        <!--android:layout_toStartOf="@+id/location_icon"-->
+        <!--android:layout_alignParentBottom="true" />-->
+
+</RelativeLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:id="@+id/topLevelLayout"
+    android:background="#FFF"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/primary_darker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+    <LinearLayout
+        android:focusable="true" android:focusableInTouchMode="true"
+        android:layout_width="0px" android:layout_height="0px"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:elevation="3dp"
+        android:gravity="center"
+        android:background="@drawable/bottom_card_edge"
+        android:layout_height="50dp"
+        android:layout_marginBottom="3dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/search_frame"
+                android:background="@drawable/ripple_grey"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp">
+                <ImageView
+                    android:src="@drawable/ic_search_black_36dp"
+                    android:id="@+id/search_icon"
+                    android:layout_gravity="center"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp" />
+            </FrameLayout>
+
+            <EditText
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:layout_toRightOf="@id/search_frame"
+                android:hint="Search Icons"
+                android:paddingLeft="10dp"
+                android:maxLines="1"
+                android:inputType="textNoSuggestions"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/edit_text" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.markshoe.stashapp.CustomViews.ItemFragmentGridLayout
+        android:id="@+id/item_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    </ScrollView>
+
+
+
+
+</LinearLayout>

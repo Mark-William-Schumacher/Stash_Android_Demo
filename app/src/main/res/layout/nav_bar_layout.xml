@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:elevation="3dp"
+    android:background="@drawable/bottom_card_edge"
+    android:gravity="center"
+    android:layout_height="50dp"
+    android:layout_marginTop="0dp">
+
+
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/grid"
+            android:background="@drawable/ripple_grey"
+            android:layout_width="80dp"
+            android:layout_height="50dp">
+            <ImageView
+                android:id="@+id/griddrawable"
+               android:layout_gravity="center"
+                android:layout_height="32dp"
+                android:layout_width="32dp"
+                android:src="@drawable/noun_grid_10564"/>
+        </FrameLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/line"
+            android:layout_toRightOf="@id/grid"
+            android:background="@color/grey_800"/>
+
+
+        <FrameLayout
+            android:id="@+id/list"
+            android:layout_toEndOf="@id/line"
+            android:background="@drawable/ripple_grey"
+            android:layout_width="80dp"
+            android:layout_height="50dp">
+            <ImageView
+                android:id="@+id/listdrawable"
+                android:layout_gravity="center"
+                android:layout_height="32dp"
+                android:layout_width="32dp"
+                android:src="@drawable/noun_list_10602" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/line2"
+            android:layout_toRightOf="@id/list"
+            android:background="@color/grey_800"/>
+
+
+        <FrameLayout
+            android:id="@+id/local"
+            android:layout_toEndOf="@id/line"
+            android:background="@drawable/ripple_grey"
+            android:layout_toRightOf="@id/line2"
+            android:layout_width="80dp"
+            android:layout_height="50dp">
+            <ImageView
+                android:id="@+id/localdrawable"
+                android:layout_gravity="center"
+                android:layout_height="32dp"
+                android:layout_width="32dp"
+                android:src="@drawable/noun_map_marker_17417" />
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

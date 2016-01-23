@@ -22,7 +22,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_marginTop="6dp"
-            android:layout_height="349dp">
+            android:layout_height="380dp">
         <fragment
             android:id="@+id/map"
             android:layout_width="match_parent"

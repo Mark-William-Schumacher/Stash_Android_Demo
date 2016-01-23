@@ -4,6 +4,7 @@
     xmlns:shoebag="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
+    android:background="@drawable/ripple_grey"
     android:layout_marginBottom="2dp"
     android:layout_height="70dp">
 
@@ -23,6 +24,8 @@
             <com.markshoe.stashapp.CustomViews.HighlightedDrawable
                 android:id="@+id/highlighted_drawable"
                 android:layout_gravity="center"
+                shoebag:bottom_circle_color="@color/primary_dark"
+                shoebag:top_circle_color="@color/primary_dark"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawable="@drawable/personal"

@@ -3,6 +3,7 @@ package com.markshoe.stashapp;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.markshoe.stashapp.CustomViews.ItemFragmentGridLayout;
+import com.markshoe.stashapp.data.DbUtility;
 
+import java.sql.Blob;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,7 +45,8 @@ public class BackpackCardAdapter {
 
 
     public void updateCursor(Cursor cursor){
-        // numOfItems [3] , bag_res_name [2] , bag_name[1], current_bag_key[0]
+        // bag_image_blob[5], bag_image_code [4] numOfItems [3] , bag_res_name [2] , bag_name[1]
+        // current_bag_key[0]
         if (cursor == null || !cursor.moveToFirst()){
             return;
         }
@@ -57,7 +61,9 @@ public class BackpackCardAdapter {
                     mContainer.addView(v);
                     bagIdToCardMap.put(bagId, new BackpackCard(v,bagId));
                 }
-                (bagIdToCardMap.get(bagId)).setBagCardInfo(resName,bagName,numOfItems);
+                Bitmap b = DbUtility.getImage(cursor.getBlob(5));
+                int code  = cursor.getInt(4);
+                (bagIdToCardMap.get(bagId)).setBagCardInfo(resName, bagName, numOfItems,b, code);
             } else if (bagId == 0){
                 if (outOfBackpackCard == null){
                     View v = mInflater.inflate(R.layout.out_of_backpack_card,mContainer,false);
@@ -139,14 +145,18 @@ public class BackpackCardAdapter {
         }
 
 
-        public void setBagCardInfo(String resName, String bagName, int numOfItems){
+        public void setBagCardInfo(String resName, String bagName, int numOfItems,Bitmap bitmap, int code){
             int resId = mContext.getResources().getIdentifier(resName, "drawable", mContext.getPackageName());
             if (resId == 0){
                 Log.e("BackpackCardAdapter", "Error could not find a resourse for: " + resName +
                         " defaulting to backpack icon");
                 resId = R.drawable.bag_icon;
             }
-            bagIcon.setImageDrawable(mContext.getResources().getDrawable(resId));
+            if (code != 0){
+                bagIcon.setImageBitmap(bitmap);
+            }else{
+                bagIcon.setImageDrawable(mContext.getResources().getDrawable(resId));
+            }
             backpackName.setText(bagName);
             connectionText.setText("Connected");
             itemInfo.setText(String.format("Currently holding %d items", numOfItems));

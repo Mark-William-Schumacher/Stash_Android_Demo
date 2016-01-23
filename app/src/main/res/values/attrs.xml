@@ -3,19 +3,10 @@
 
     <declare-styleable name="ItemInGridView">
         <attr name="android:drawable" />
+        <attr name="top_circle_color" format="color"/>
+        <attr name="bottom_circle_color" format="color"/>
+        <attr name="option_int" format="integer"/>
         <attr name="highlight_color" format="color" />
-    </declare-styleable>
-
-
-
-
-    <declare-styleable name="BackpackNavBar">
-        <attr name="drawable1" format="reference"  />
-        <attr name="drawable2" format="reference"  />
-        <attr name="drawable3" format="reference"  />
-        <attr name="selected" format="integer" />
-        <attr name="baseColor" format="color"  />
-        <attr name="highlightedColor" format="color"  />
     </declare-styleable>
 
 </resources>

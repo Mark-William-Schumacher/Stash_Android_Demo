@@ -1,5 +1,6 @@
 package com.markshoe.stashapp;
 
+import android.animation.LayoutTransition;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.markshoe.stashapp.CustomViews.HighlightedDrawable;
 import com.markshoe.stashapp.CustomViews.HighlightedDrawableTransaction;
 
 import java.util.List;
@@ -73,8 +75,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                     .setText(getDescription(itemTransaction.direction, bagName));
             ((ImageView) singleTransaction.findViewById(R.id.in_out_symbol))
                     .setImageDrawable(getInOutDrawable(itemTransaction.direction));
-            ((HighlightedDrawableTransaction) singleTransaction.findViewById(R.id.highlighted_drawable))
-                    .setItem(itemTransaction.itemID,itemTransaction.resId, mContext.getResources().getColor(itemTransaction.color), itemTransaction.title);
+            ((HighlightedDrawable) singleTransaction.findViewById(R.id.highlighted_drawable))
+                    .setItem((int) itemTransaction.itemID, itemTransaction.resId, mContext.getResources().getColor(R.color.primary_dark), itemTransaction.title);
 
             container.addView(singleTransaction);
         }

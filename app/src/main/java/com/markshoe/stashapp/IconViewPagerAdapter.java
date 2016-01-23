@@ -94,17 +94,17 @@ public class IconViewPagerAdapter extends FragmentStatePagerAdapter
         String url="";
         switch (position) {
             case 0:
-                d = mContext.getResources().getDrawable(R.drawable.skyline2);
+                d = mContext.getResources().getDrawable(R.drawable.city2);
                 url = "https://www.thelongeststay.com/media/catalog/product/cache/5/image/9df78eab33525d08d6e5fb8d27136e95/n/e/new_york_sykline_wall_clock.jpg";
                 color = mContext.getResources().getColor(R.color.white);// 0xFFFFFF;//mContext.getResources().getColor(Co);
                 break;//0x2F97BA;
             case 1:
-                d = mContext.getResources().getDrawable(R.drawable.skyline2);
+                d = mContext.getResources().getDrawable(R.drawable.landscape_full);
                 url = "https://s-media-cache-ak0.pinimg.com/736x/34/ac/e5/34ace5629b83681632bf38dd13c40ca7.jpg";
                 color = mContext.getResources().getColor(R.color.white);
                 break;
             case 2:
-                d = mContext.getResources().getDrawable(R.drawable.skyline2);
+                d = mContext.getResources().getDrawable(R.drawable.landscape_full);
                 url = "http://www.clker.com/cliparts/z/a/T/u/F/3/large-gray-city-skyline-md.png";
                 color = mContext.getResources().getColor(R.color.white);
                 break;

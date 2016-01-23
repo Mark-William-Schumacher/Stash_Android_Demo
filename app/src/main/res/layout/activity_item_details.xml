@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/primary_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/MyPopupMenu"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/picture_frame"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+                <com.markshoe.stashapp.CustomViews.HighlightedDrawable
+                    android:id="@+id/highlighted_drawable_profile"
+                    android:alpha="0"
+                    android:layout_gravity="center"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    app:bottom_circle_color="@color/primary_dark"
+                    app:top_circle_color="@color/primary_dark"
+                    android:drawable = "@drawable/personal" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:alpha="1"
+                    android:id="@+id/profile_image"
+                    android:layout_gravity="center"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:src="@drawable/iphone_no_bez"/>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/picture_frame"
+                android:gravity="center_vertical"
+                android:textSize="22sp"
+                android:layout_marginTop="-5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="sans-serif-light"
+                android:textStyle="normal"
+                android:textColor="@color/grey_900"
+                android:text="Marks Ipod Touch"
+                />
+
+
+            <FrameLayout
+                android:layout_below="@+id/item_name"
+                android:id="@+id/view_location_banner"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_centerVertical="true"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_height="50dp">
+                            <LinearLayout
+                                android:background="@color/primary_dark"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:layout_height="match_parent">
+                                <TextView
+                                    android:layout_centerVertical="true"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="22sp"
+                                    android:fontFamily="sans-serif-thin"
+                                    android:textStyle="normal"
+                                    android:paddingRight="3dp"
+                                    android:textColor="@color/grey_200"
+                                    android:text="View"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:background="@color/primary_dark"
+                                android:layout_width="0dp"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent">
+                                <TextView
+                                    android:layout_centerVertical="true"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="22sp"
+                                    android:fontFamily="sans-serif-thin"
+                                    android:textStyle="normal"
+                                    android:paddingLeft="3dp"
+                                    android:textColor="@color/grey_200"
+                                    android:text="Location"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <com.markshoe.stashapp.CustomViews.HighlightedDrawable
+                            android:id="@+id/highlighted_drawable"
+                            android:layout_gravity="center"
+                            android:layout_centerInParent="true"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:drawable="@drawable/noun_map_marker_17417"
+                            app:top_circle_color= "@color/primary_dark"
+                            app:bottom_circle_color="@color/primary_dark"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/clickable_location_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_white_on_primary"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_marginTop="-15dp"
+                android:layout_width="match_parent"
+                android:layout_below="@id/view_location_banner"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/alarm_relative_layout"
+                    android:background="@drawable/ripple_grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:id="@+id/icon_frame_alarm"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:alpha="0.9"
+                            android:src = "@drawable/alarm_clock_2" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:fontFamily="sans-serif-light"
+                        android:textStyle="normal"
+                        android:textColor="@color/grey_900"
+                        android:text="Set reminder"/>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:alpha="0.7"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/primary_dark"/>
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/scan_color_relative_layout"
+                    android:background="@drawable/ripple_grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:id="@+id/scan_color_frame"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src = "@drawable/circle_no_border" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:fontFamily="sans-serif-light"
+                        android:textStyle="normal"
+                        android:textColor="@color/grey_900"
+                        android:text="Set scan color"/>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:alpha="0.7"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/primary_dark"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/edit_relative_layout"
+                    android:background="@drawable/ripple_grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:id="@+id/manually_move"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:alpha="0.9"
+                            android:layout_gravity="center"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src = "@drawable/ic_mode_edit_black_24dp" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:fontFamily="sans-serif-light"
+                        android:textStyle="normal"
+                        android:textColor="@color/grey_900"
+                        android:text="Edit item"/>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:alpha="0.7"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/primary_dark"/>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            </FrameLayout>
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

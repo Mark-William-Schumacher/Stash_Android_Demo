@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/logo_white"
-    android:layout_width="290dp"
-    android:layout_height="130dp"
+    android:layout_width="260dp"
+    android:layout_height="100dp"
 
     android:fitsSystemWindows="true"
     android:adjustViewBounds="true"
-    android:src="@drawable/stash_pen" />
+    android:src="@drawable/the_stash_logo_black150" />

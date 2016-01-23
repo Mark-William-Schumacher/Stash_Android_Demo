@@ -43,10 +43,10 @@ public class TestUtilities extends AndroidTestCase {
         return TransactionEntry.createContentValues(39.349, 1.93, System.currentTimeMillis(),2);
     }
     public static ContentValues createBag1(){
-        return BagEntry.createContentValues("Main Backpack","bagicon",23.2,23.1);
+        return BagEntry.createContentValues("Main Backpack","bagicon",23.2,23.1, BagEntry.NO_IMAGE,null);
     }
     public static ContentValues createBag2(){
-        return BagEntry.createContentValues("Gym Bag","dufflebag",23.1,99.9);
+        return BagEntry.createContentValues("Gym Bag","dufflebag",23.1,99.9,BagEntry.NO_IMAGE,null);
     }
 
 

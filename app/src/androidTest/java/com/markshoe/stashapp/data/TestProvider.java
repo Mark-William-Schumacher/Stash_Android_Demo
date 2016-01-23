@@ -203,7 +203,7 @@ public class TestProvider extends AndroidTestCase {
 
     public long quickBagCreate(String bagName, String drawableName, double lat, double lng){
         Uri insertUri = BagEntry.CONTENT_URI;
-        ContentValues cv = BagEntry.createContentValues(bagName, drawableName, lat, lng);
+        ContentValues cv = BagEntry.createContentValues(bagName, drawableName, lat, lng,BagEntry.NO_IMAGE,null);
         Uri uri = cr.insert(insertUri, cv);
         Cursor c = cr.query(uri, null, null, null, null);
         TestUtilities.validateCursor("Bad Item Cursor ", c, cv);

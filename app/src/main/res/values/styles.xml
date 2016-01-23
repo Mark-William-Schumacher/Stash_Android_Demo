@@ -16,6 +16,10 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
+
+        <item name="android:popupBackground">@style/MyPopupMenu</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:colorBackground">@color/white</item>
         <item name="android:textColorPrimary">@android:color/black</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="windowNoTitle">true</item>
@@ -37,7 +41,7 @@
 
     <style name = "MainTheme" parent="AppTheme">
         <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
-        <item name="android:popupBackground">@android:color/black</item>
+        <item name="android:popupBackground">@style/MyPopupMenu</item>
     </style>
 
     <style name="OverFlow" parent="AppTheme">

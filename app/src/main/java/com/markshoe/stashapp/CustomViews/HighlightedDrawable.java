@@ -1,8 +1,6 @@
 package com.markshoe.stashapp.CustomViews;
 
-import android.app.ActionBar;
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,7 +9,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.graphics.Typeface;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -21,9 +19,6 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.markshoe.stashapp.Backpack;
@@ -49,13 +44,15 @@ public class HighlightedDrawable extends View {
     /* HighlightColor */
     private int mHighlightColour;
     private int mIconId;
-    private String mTitle;
+    private String mTitle = "X";
     public long mItemId;
     Context mContext ;
     public boolean mTag = true;
     private float CORNER_RADIUS = 0f;
     private int CIRCLE_TAG_BUTTON_RADIUS;
     private int mCurrentStyle = 0;
+    private int mTopCircleColour=0;
+    private int mBtmCircleColour=0;
 
 
     public HighlightedDrawable(Context context) { this(context, null); }
@@ -69,8 +66,12 @@ public class HighlightedDrawable extends View {
         if (attrs!=null) {
             TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
                     R.styleable.ItemInGridView, 0, 0);
-            setIconDrawable(a.getDrawable(R.styleable.ItemInGridView_android_drawable));
+            Drawable d = a.getDrawable(R.styleable.ItemInGridView_android_drawable);
+            setIconDrawable(d.getConstantState().newDrawable().mutate());
             mHighlightColour = a.getInteger(R.styleable.ItemInGridView_highlight_color, 0);
+            mTopCircleColour = a.getColor(R.styleable.ItemInGridView_top_circle_color,0);
+            mBtmCircleColour = a.getColor(R.styleable.ItemInGridView_bottom_circle_color,0);
+            mCurrentStyle = a.getInteger(R.styleable.ItemInGridView_option_int,0);
             a.recycle();
         }
         CORNER_RADIUS =  context.getResources().getDisplayMetrics().density*7; // 7 dp corner radius
@@ -86,15 +87,28 @@ public class HighlightedDrawable extends View {
     }
 
     protected void onDraw(Canvas canvas){
+        //TODO remove code out of ondraw that doesnt need to be here
 
         //Drawable gd = addGradient(255, mContext.getResources().getColor(R.color.grey_200),255);
         //this.setBackgroundDrawable(gd);
+        int backgroundBottom = (mBtmCircleColour!=0)? mBtmCircleColour :  mContext.getResources().getColor(R.color.primary_dark);
+        int backgroundTop = (mTopCircleColour!=0)? mTopCircleColour :  mContext.getResources().getColor(R.color.primary_dark);
+        int foreground = mContext.getResources().getColor(R.color.grey_200);
+        //addCircularGradient(255,background, background, 255, canvas);
+        Drawable top = getResources().getDrawable(R.drawable.full_circle);
+        top.setColorFilter(backgroundTop, PorterDuff.Mode.MULTIPLY);
+        top.setBounds(0, 0, getMeasuredWidth(), getMeasuredHeight());
+        top.draw(canvas);
 
-        int background = mContext.getResources().getColor(R.color.primary_dark);
-        int foreground = mContext.getResources().getColor(R.color.grey_100);
-        addCircularGradient(255,background, background, 255, canvas);
+        Drawable bottom = getResources().getDrawable(R.drawable.bottom_half_circle);
+        bottom.setColorFilter(backgroundBottom, PorterDuff.Mode.MULTIPLY);
+        bottom.setBounds(0, 0, getMeasuredWidth(), getMeasuredHeight());
+        bottom.draw(canvas);
+
         if (mCurrentStyle == STANDARD_MODE) {
-            mIcon.setBounds(0 + 30, 0 + 30, getMeasuredWidth() - 30, getMeasuredHeight() - 30);
+            int widthMinus = getMeasuredWidth()/6; // eighth
+            int heightMinus = getMeasuredHeight()/6; // eightth
+            mIcon.setBounds(0 + widthMinus, 0 + heightMinus, getMeasuredWidth() - widthMinus, getMeasuredHeight() - heightMinus);
             int red = (foreground & 0xFF0000) / 0xFFFF;
             int green = (foreground & 0xFF00) / 0xFF;
             int blue = foreground & 0xFF;
@@ -104,11 +118,12 @@ public class HighlightedDrawable extends View {
                     , 0, 0, 0, 1, 0};
             //addSmallTagCircle(canvas);
             ColorFilter colorFilter2 = new ColorMatrixColorFilter(matrix);
+
             mIcon.setColorFilter(colorFilter2);
             mIcon.setAlpha(255);
             mIcon.draw(canvas);
         } if (mCurrentStyle == LETTER_MODE){
-            String firstLetter = mTitle.substring(0,1);
+            String firstLetter = mTitle.substring(0, 1);
             TextDrawable drawable2 = TextDrawable.builder()
                     .beginConfig()
                         .textColor(foreground)
@@ -151,7 +166,7 @@ public class HighlightedDrawable extends View {
     }
 
     public void setIcon(int resId){
-        setIconDrawable(getResources().getDrawable(resId));
+        setIconDrawable(getResources().getDrawable(resId).getConstantState().newDrawable().mutate());
         mIconId = resId;
         return;
     }
@@ -159,10 +174,11 @@ public class HighlightedDrawable extends View {
         return mIconId;
     }
 
-    private void setIconDrawable(Drawable d){
+    public void setIconDrawable(Drawable d){
         if (d!=null){
             mIcon=d;
         }
+        invalidate();
     }
 
     public void setItem(Backpack.Item i){
@@ -245,6 +261,8 @@ public class HighlightedDrawable extends View {
         setHighlightColour(color);
         setTitle(title);
     }
+    public void setBottomCircleColor (int color){mBtmCircleColour = color;}
+    public void setTopCircleColor (int color){mTopCircleColour = color;}
     public void setTitle(String title){
         mTitle = title;
     }
@@ -257,9 +275,6 @@ public class HighlightedDrawable extends View {
     public void setHighlightColour(int color){
         mHighlightColour = color;
     }
-    public void setMode(int mode){mCurrentStyle = mode;}
-
-
-
+    public void setMode(int mode){mCurrentStyle = mode; invalidate();}
 }
 

@@ -15,7 +15,7 @@ import com.markshoe.stashapp.data.BagContract.ItemTransactionEntry;
 import com.markshoe.stashapp.data.BagContract.TransactionEntry;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashSet;//723 rymal rd west , west mount medical center
 
 public class TestDb extends AndroidTestCase {
 
@@ -125,6 +125,9 @@ public class TestDb extends AndroidTestCase {
         BagEntryColumns.add(BagEntry.COLUMN_COORD_LAT);
         BagEntryColumns.add(BagEntry.COLUMN_COORD_LONG);
         BagEntryColumns.add(BagEntry.COLUMN_DRAWABLE_NAME);
+        BagEntryColumns.add(BagEntry.COLUMN_IMAGE_CODE);
+        BagEntryColumns.add(BagEntry.COLUMN_BLOB_IMAGE);
+
         c = db.rawQuery("PRAGMA table_info(" + BagEntry.TABLE_NAME + ")", null);
         assertTrue("Unable to query db for information for Bag Table.", c.moveToFirst());
         columnNameIndex = c.getColumnIndex("name");

@@ -11,13 +11,13 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1">
-        <com.markshoe.stashapp.CustomViews.HighlightedDrawableTransaction
+        <com.markshoe.stashapp.CustomViews.HighlightedDrawable
             android:id="@+id/highlighted_drawable"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="center"
             android:drawable="@drawable/personal"
-            shoebag:highlight_color="@android:color/holo_blue_light" />
+            shoebag:highlight_color="@color/primary_dark" />
     </FrameLayout>
 
     <FrameLayout

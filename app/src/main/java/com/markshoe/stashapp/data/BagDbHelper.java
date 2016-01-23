@@ -16,7 +16,7 @@ import com.markshoe.stashapp.data.BagContract.TransactionEntry;
 public class BagDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 8;
 
     public static final String DATABASE_NAME = "bag.db";
 
@@ -42,7 +42,9 @@ public class BagDbHelper extends SQLiteOpenHelper {
                         BagEntry.COLUMN_NAME + " STRING NOT NULL, " +
                         BagEntry.COLUMN_COORD_LAT + " REAL, " +
                         BagEntry.COLUMN_COORD_LONG + " REAL, " +
-                        BagEntry.COLUMN_DRAWABLE_NAME + " STRING NOT NULL);";
+                        BagEntry.COLUMN_DRAWABLE_NAME + " STRING NOT NULL, " +
+                        BagEntry.COLUMN_IMAGE_CODE + " INTEGER NOT NULL, " +
+                        BagEntry.COLUMN_BLOB_IMAGE + " BLOB);";
 
         final String SQL_CREATE_ITEM_TABLE =
                 "CREATE TABLE " + ItemEntry.TABLE_NAME + " (" +

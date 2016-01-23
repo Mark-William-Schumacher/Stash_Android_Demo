@@ -1,5 +1,8 @@
 package com.markshoe.stashapp.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,8 +27,10 @@ public class MapsFragment extends Fragment {
 
     private GoogleMap map;
     ObservableScrollView mScrollView;
-    static final LatLng HAMBURG = new LatLng(53.558, 9.927);
-    static final LatLng KIEL = new LatLng(53.551, 9.993);
+    static final LatLng COMPUTER_LOCAL = new LatLng(43.772, -79.246);
+    static final LatLng KEYS_LOCAL = new LatLng(43.772, -79.276);
+    static final LatLng IPOD_LOCAL = new LatLng(43.769, -79.262);
+    static final LatLng CHARGER_LOCAL = new LatLng(43.761, -79.258);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,20 +43,41 @@ public class MapsFragment extends Fragment {
 
         // Get a handle to the Map Fragment
         GoogleMap map = getMapFragment().getMap();
-        Marker hamburg = map.addMarker(new MarkerOptions().position(HAMBURG)
-                .title("Hamburg"));
-        Marker kiel = map.addMarker(new MarkerOptions()
-                .position(KIEL)
-                .title("Kiel")
-                .snippet("Kiel is cool")
+        Marker hamburg = map.addMarker(new MarkerOptions()
+                .position(COMPUTER_LOCAL)
+                .title("Macbook Pro")
+                .snippet("Last seen 11/08 11:54pm")
                 .icon(BitmapDescriptorFactory
-                        .fromResource(R.drawable.ic_launcher)));
+                        .fromBitmap(scaleImage(getActivity().getResources().getDrawable(R.drawable.marker_computer)))));
+
+
+        Marker kiel = map.addMarker(new MarkerOptions()
+                .position(KEYS_LOCAL)
+                .title("House Keys")
+                .snippet("Last seen 12/09 2:24pm")
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(scaleImage(getActivity().getResources().getDrawable(R.drawable.marker_keys)))));
+
+
+        Marker ipod = map.addMarker(new MarkerOptions()
+                .position(IPOD_LOCAL)
+                .title("Ipod")
+                .snippet("Last seen 12/13 3:24pm")
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(scaleImage(getActivity().getResources().getDrawable(R.drawable.marker_ipod)))));
+
+        Marker charger = map.addMarker(new MarkerOptions()
+                .position(CHARGER_LOCAL)
+                .title("Macbook Charger")
+                .snippet("Last seen 12/13 9:24am")
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(scaleImage(getActivity().getResources().getDrawable(R.drawable.marker_charger)))));
 
         // Move the camera instantly to hamburg with a zoom of 15.
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(HAMBURG, 15));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(IPOD_LOCAL, 11));
 
         // Zoom in, animating the camera.
-        map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+        map.animateCamera(CameraUpdateFactory.zoomTo(12.5f), 2000, null);
 
         return rootView;
     }
@@ -76,6 +102,30 @@ public class MapsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mScrollView = (ObservableScrollView) view.findViewById(R.id.scrollView);
         MaterialViewPagerHelper.registerScrollView(getActivity(), mScrollView, null);
+    }
+
+
+    public Bitmap scaleImage (Drawable image) {
+
+        if ((image == null) || !(image instanceof BitmapDrawable)) {
+            return null;
+        }
+
+        Bitmap b = ((BitmapDrawable)image).getBitmap();
+
+        int width = image.getIntrinsicWidth();
+        int newWidth = 110;
+        float scaleFactor = (float)newWidth/width;
+
+        int sizeX = Math.round(image.getIntrinsicWidth() * scaleFactor);
+        int sizeY = Math.round(image.getIntrinsicHeight() * scaleFactor);
+
+        Bitmap bitmapResized = Bitmap.createScaledBitmap(b, sizeX, sizeY, false);
+
+        image = new BitmapDrawable(getResources(), bitmapResized);
+
+        return ((BitmapDrawable) image).getBitmap();
+
     }
 
 }

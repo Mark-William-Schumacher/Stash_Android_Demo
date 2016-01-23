@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,8 +13,8 @@
         android:layout_height="match_parent"
         app:viewpager_logo="@layout/header_logo"
         app:viewpager_pagerTitleStrip="@layout/my_tabs"
-        app:viewpager_logoMarginTop="30dp"
-        app:viewpager_headerHeight="200dp"
+        app:viewpager_logoMarginTop="22dp"
+        app:viewpager_headerHeight="159dp"
         app:viewpager_headerAlpha="0.6"
         app:viewpager_hideLogoWithFade="true"
         app:viewpager_hideToolbarAndTitle="false"

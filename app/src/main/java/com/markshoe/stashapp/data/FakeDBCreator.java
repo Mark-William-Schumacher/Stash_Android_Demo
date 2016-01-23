@@ -4,9 +4,15 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.widget.LinearLayout;
 
+import com.markshoe.stashapp.CustomViews.HighlightedDrawable;
 import com.markshoe.stashapp.R;
 
 import java.util.ArrayList;
@@ -88,11 +94,14 @@ public class FakeDBCreator {
         itemIds.add(quickItemCreate("ab24", "Learning Android v2",   2,  "noun_book_62494"));
         itemIds.add(quickItemCreate("ab25", "Iphone Charger",        2,  "noun_charger_150532"));
         itemIds.add(quickItemCreate("ab26", "Ipad Mini",             2,  "noun_ipad_4586"));
-        itemIds.add(quickItemCreate("ab627", "Football",             2,  "football"));
+        itemIds.add(quickItemCreate("ab627", "Football", 2, "football"));
 
-
-        long backpack1 = quickBagCreate("Main Backpack", "backpack", 43.200061, -80.005033);
-        long backpack2 = quickBagCreate("Gym bag", "dufflebag", 43.202099, -80.000984);
+//        byte[] array = DbUtility.getBytes(c, R.drawable.stash_duffle_head_on);
+        byte[] array = DbUtility.getBytes(c,R.drawable.black_backpack);
+        long backpack1 = quickBagCreate("Main Backpack", "backpack", 43.200061, -80.005033, BagContract.BagEntry.REAL_IMAGE, array);
+        byte[] array2 = DbUtility.getBytes(BitmapFactory.decodeResource(c.getResources(),
+                R.drawable.stash_duffle_head_on));
+        long backpack2 = quickBagCreate("Gym bag", "dufflebag", 43.202099, -80.000984, BagContract.BagEntry.REAL_IMAGE, array2);
         // 43.198429, -80.001392
 
 
@@ -122,17 +131,21 @@ public class FakeDBCreator {
         Uri insertUri = BagContract.ItemEntry.CONTENT_URI;
         int color = getRandomTagColor();
 
+        int resId = c.getResources().getIdentifier(resourseName, "drawable", c.getPackageName());
+        Bitmap mImage = BitmapFactory.decodeResource(c.getResources(), resId);
+        byte[] b = DbUtility.getBytes(mImage);
+
         ContentValues cv = BagContract.ItemEntry.createContentValues(tagID, name, currentbag, "Put this on your head to stay warm",
-                System.currentTimeMillis(), color, resourseName, BagContract.ItemEntry.ICON_IMAGE,null);
+                System.currentTimeMillis(), color, resourseName, BagContract.ItemEntry.ICON_IMAGE,b);
         Uri uri = cr.insert(insertUri, cv);
         Cursor c = cr.query(uri, null, null, null, null);
         c.close();
         return Long.parseLong(BagContract.ItemEntry.getItemIdfromUri(uri));
     }
 
-    public long quickBagCreate(String bagName, String drawableName, double lat, double lng){
+    public long quickBagCreate(String bagName, String drawableName, double lat, double lng, int imageCode, byte[] imageBlob){
         Uri insertUri = BagContract.BagEntry.CONTENT_URI;
-        ContentValues cv = BagContract.BagEntry.createContentValues(bagName, drawableName, lat, lng);
+        ContentValues cv = BagContract.BagEntry.createContentValues(bagName, drawableName, lat, lng, imageCode, imageBlob);
         Uri uri = cr.insert(insertUri, cv);
         Cursor c = cr.query(uri, null, null, null, null);
         c.close();

@@ -1,7 +1,10 @@
 package com.markshoe.stashapp.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.markshoe.stashapp.ActivityIconChooser;
+import com.markshoe.stashapp.ActivityItemDetails;
 import com.markshoe.stashapp.CustomViews.HighlightedDrawable;
 import com.markshoe.stashapp.R;
 import com.markshoe.stashapp.data.BagContract;
@@ -37,13 +42,14 @@ public class BackpackItemsListFragment extends Fragment implements LoaderManager
     ScrollView mScrollView;
     LinearLayout mLinearLayout;
     long bagId = 0;
+    Cursor mData;
     BackpackItemsListFragmentAdapter itemListAdapter;
     LayoutInflater mInflater;
 
     int GLOBAL=0;
     String[] days = {"9:52 PM", "7:45 PM" , "Yesterday", "Yesterday", "Tuesday", "Monday", "13 Jul", "12 Jul", "7 Jul", "3 Jul", "3 Jul","3 Jul","3 Jul","3 Jul","3 Jul","3 Jul", "7 Jul", "3 Jul", "3 Jul","3 Jul","3 Jul","3 Jul","3 Jul","3 Jul"};
-    String[] citys = {"Ancaster, Ontario","West End ,Vancouver","Coal Harbour, Vancouver", "False Creek, Vancouver", "Kerrisdale, Vancouver" ,  "Marpole, Vancouver", "Shaughnessy, Vancouver", "South Cambie, Vancouver"
-                        ,"Ancaster, Ontario","West End ,Vancouver","Coal Harbour, Vancouver", "False Creek, Vancouver", "Kerrisdale, Vancouver" ,  "Marpole, Vancouver", "Shaughnessy, Vancouver", "South Cambie, Vancouver",
+    String[] citys = {"Ancaster, Ontario","Stauffer ,Kingston","The Arc, Kingston","Coal Harbour, Vancouver", "Distillery District, Toronto", "St. Lawrence, Toronto" ,  "Marpole, Vancouver", "Shaughnessy, Vancouver", "South Cambie, Vancouver"
+                        ,"Old Ancaster, Hamilton","West End ,Vancouver","Coal Harbour, Vancouver", "False Creek, Vancouver", "Kerrisdale, Vancouver" ,  "Marpole, Vancouver", "Shaughnessy, Vancouver", "South Cambie, Vancouver",
             "Ancaster, Ontario","West End ,Vancouver","Coal Harbour, Vancouver", "False Creek, Vancouver", "Kerrisdale, Vancouver" ,  "Marpole, Vancouver", "Shaughnessy, Vancouver", "South Cambie, Vancouver"};
     String[] alarmTimes = {"N/A", "8:30am Wed","N/A", "9:30pm Tues","5:30pm Sat", "N/A", "10:30pm Friday", "N/A", "8:30am Wed","N/A", "9:30pm Tues","5:30pm Sat", "N/A", "10:30pm Friday", "N/A","5:30pm Sat", "N/A", "10:30pm Friday", "N/A", "8:30am Wed","N/A", "9:30pm Tues","5:30pm Sat", "N/A", "10:30pm Friday", "N/A"};
     int[] icons = { 2 , 1, 2, 1, 3, 1, 4, 1, 2,1, 2, 2,1,1,1,1};
@@ -52,7 +58,6 @@ public class BackpackItemsListFragment extends Fragment implements LoaderManager
      * @param savedIntanceState
      */
     public void onActivityCreated(Bundle savedIntanceState) {
-        getLoaderManager().initLoader(ITEMS_LOADER, null, this);
         super.onActivityCreated(savedIntanceState);
     }
 
@@ -65,7 +70,10 @@ public class BackpackItemsListFragment extends Fragment implements LoaderManager
         mInflater = inflater;
         mScrollView = (ScrollView) inflater.inflate(R.layout.fragment_backpack_list_view, container, false);
         mLinearLayout = (LinearLayout) mScrollView.findViewById(R.id.linear_layout);
-        itemListAdapter = new BackpackItemsListFragmentAdapter(getActivity(),null,mLinearLayout,this);
+        if (savedInstanceState == null){
+            itemListAdapter = new BackpackItemsListFragmentAdapter(getActivity(),null,mLinearLayout,this);
+            getLoaderManager().initLoader(ITEMS_LOADER, null, this);
+        }
         return mScrollView;
     }
 
@@ -84,8 +92,10 @@ public class BackpackItemsListFragment extends Fragment implements LoaderManager
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        itemListAdapter.updateCursor(data);
-        getLoaderManager().destroyLoader(ITEMS_LOADER);
+        if(data != null && mData != data){
+            mData = data;
+            itemListAdapter.updateCursor(data);
+        }
     }
 
     @Override
@@ -111,6 +121,8 @@ public class BackpackItemsListFragment extends Fragment implements LoaderManager
         public void updateCursor(Cursor cursor) {
             // item_image_blob[9],item_image_code[8],item_res_name[7] item_color[6] date_description[5]
             // current_bag_key[4] item_description[3] item_name[2] tag_id[1] _id[0]
+            GLOBAL = 0 ;
+            mContainer.removeAllViews();
             if (cursor == null || !cursor.moveToFirst()) {
                 return;
             }
@@ -124,15 +136,13 @@ public class BackpackItemsListFragment extends Fragment implements LoaderManager
                 int color = cursor.getInt(6);
                 String itemName = cursor.getString(2);
                 long itemId = cursor.getLong(0);
-                int resId = mContext.getResources().getIdentifier(resName, "drawable", mContext.getPackageName());
-                if (resId == 0 && imageCode != BagContract.ItemEntry.NO_IMAGE){
-                    Log.e("bp-ad", "Error could not find a resourse for: " + resName +
-                            " defaulting to backpack icon");
-                    resId = R.drawable.bag_icon;
+                Drawable drawable = DbUtility.getDrawableFromByteArray(getActivity(), cursor.getBlob(9));
+                if (blobAsBytes == null && imageCode != BagContract.ItemEntry.NO_IMAGE){
+                    imageCode = BagContract.ItemEntry.NO_IMAGE;
                 }
                 View v = mInflater.inflate(R.layout.fragment_backpack_list_view_item,mContainer,false);
                 //if (!Even) v.setBackgroundColor(getActivity().getResources().getColor(R.color.grey_400));
-                new ItemInBagListView(v,resId,itemName,"TIME",color,mClickListener,imageCode,blobAsBytes);
+                new ItemInBagListView(v,itemId,itemName,"TIME",color,mClickListener,imageCode,drawable);
                 Even = !Even;
                 mContainer.addView(v);
             }while (cursor.moveToNext());
@@ -140,8 +150,7 @@ public class BackpackItemsListFragment extends Fragment implements LoaderManager
     }
 
 
-
-    public class ItemInBagListView {
+    public class ItemInBagListView implements View.OnClickListener{
         long bagId = 0;
         TextView tramsactionInfo;
         TextView transactionTime;
@@ -149,10 +158,20 @@ public class BackpackItemsListFragment extends Fragment implements LoaderManager
         TextView itemName;
         TextView locationName;
         ImageView icon;
-        public ItemInBagListView(View itemInList,int resId, String name, String time, int color,View.OnClickListener cl,int imageCode, byte[] blobAsBytes) {
+        long mItemId;
+        @Override
+        public void onClick(View v) {
+            Intent activityItemDetailsIntent = new Intent(getActivity(), ActivityItemDetails.class);
+            activityItemDetailsIntent.putExtra(ActivityItemDetails.ITEM_ID_KEY,mItemId);
+            startActivity(activityItemDetailsIntent);
+        }
+
+        public ItemInBagListView(View itemInList,long itemId, String name, String time, int color,View.OnClickListener cl,int imageCode, Drawable d) {
             //icon = (ImageView) itemInList.findViewById(R.id.icon_symbol);
             //icon.setColorFilter(color);
+            mItemId= itemId;
             transactionTime = (TextView) itemInList.findViewById(R.id.transaction_time);
+            itemInList.setOnClickListener(this);
 //            sticker = (ImageView) itemInList.findViewById(R.id.sticker_color);
 //            sticker.setColorFilter(color);
 //            sticker.setAlpha(0.5f);
@@ -163,16 +182,16 @@ public class BackpackItemsListFragment extends Fragment implements LoaderManager
                 HighlightedDrawable hd = (HighlightedDrawable) itemInList.findViewById(R.id.highlighted_drawable);
                 hd.setTitle(name);
                 hd.setMode(HighlightedDrawable.LETTER_MODE);
-
             }
-            else if (imageCode == BagContract.ItemEntry.ICON_IMAGE){
+            else if (imageCode == BagContract.ItemEntry.ICON_IMAGE && d!=null){
                 HighlightedDrawable hd = (HighlightedDrawable) itemInList.findViewById(R.id.highlighted_drawable);
-                hd.setProperties(resId, color);
-            }else if(imageCode == BagContract.ItemEntry.REAL_IMAGE && blobAsBytes!=null){
+                hd.setTitle(name);
+                hd.setIconDrawable(d);
+            }else if(imageCode == BagContract.ItemEntry.REAL_IMAGE && d!=null){
                 FrameLayout fl = (FrameLayout) itemInList.findViewById(R.id.icon_frame);
                 fl.removeViewAt(0);
                 CircleImageView cv = (CircleImageView) mInflater.inflate(R.layout.circular_image,fl).findViewById(R.id.profile_image);
-                cv.setImageBitmap(DbUtility.getImage(blobAsBytes));
+                cv.setImageDrawable(d);
             }else Log.e("BackpackItemsListFrag","bag image code: " +String.valueOf(imageCode));
 
 

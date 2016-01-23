@@ -235,9 +235,9 @@ public class BagProvider extends ContentProvider {
             case BAG: {
                 String[] args = { };
                 String query =
-                        "SELECT current_bag_key, bag_name, bag_res_name, count(current_bag_key) as numOfItems " +
+                        "SELECT current_bag_key, bag_name, bag_res_name, count(current_bag_key) as numOfItems, bag_image_code , bag_image_blob " +
                         "FROM item " +
-                        " LEFT OUTER JOIN ( SELECT bag_name, bag_res_name, _id as bag_id" +
+                        " LEFT OUTER JOIN ( SELECT bag_name,bag_image_code,bag_image_blob,   bag_res_name, _id as bag_id" +
                         " FROM bag ) on bag_id = current_bag_key " +
                         "GROUP BY current_bag_key " +
                         "ORDER BY current_bag_key";
@@ -277,6 +277,7 @@ public class BagProvider extends ContentProvider {
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
+        getContext().getContentResolver().notifyChange(BagContract.BagEntry.CONTENT_URI, null);
         return rowsUpdated;
     }
     // The URI Matcher used by this content provider.

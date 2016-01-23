@@ -13,10 +13,11 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
         android:minHeight="?attr/actionBarSize"
-        android:background="@color/primary_darker"
+        android:background="@color/primary_dark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/MyPopupMenu"/>
 
     <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
     <LinearLayout
@@ -31,38 +32,33 @@
         android:layout_height="50dp"
         android:layout_marginBottom="3dp">
 
-
-        <LinearLayout
+        <EditText
+            android:layout_centerHorizontal="true"
+            android:singleLine="true"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:hint="Search Icons"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:maxLines="1"
+            android:inputType="textNoSuggestions"
+            android:background="@null"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:id="@+id/edit_text" />
+        <FrameLayout
+            android:layout_toLeftOf="@id/edit_text"
+            android:id="@+id/search_frame"
+            android:background="@drawable/ripple_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp">
+            <ImageView
+                android:src="@drawable/ic_search_black_36dp"
+                android:id="@+id/search_icon"
+                android:layout_gravity="center"
+                android:layout_width="32dp"
+                android:layout_height="32dp" />
+        </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/search_frame"
-                android:background="@drawable/ripple_grey"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp">
-                <ImageView
-                    android:src="@drawable/ic_search_black_36dp"
-                    android:id="@+id/search_icon"
-                    android:layout_gravity="center"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp" />
-            </FrameLayout>
-
-            <EditText
-                android:singleLine="true"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:layout_toRightOf="@id/search_frame"
-                android:hint="Search Icons"
-                android:paddingLeft="10dp"
-                android:maxLines="1"
-                android:inputType="textNoSuggestions"
-                android:background="@null"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/edit_text" />
-        </LinearLayout>
     </RelativeLayout>
 
     <ScrollView

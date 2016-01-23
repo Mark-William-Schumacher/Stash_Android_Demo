@@ -35,6 +35,9 @@ public class BagContract {
 
 
     public static final class BagEntry implements BaseColumns {
+        public static final int NO_IMAGE = 0;
+        public static final int REAL_IMAGE = 1;
+        public static final int ICON_IMAGE = 2;
 
         public static final String TABLE_NAME = "bag";
 
@@ -47,6 +50,10 @@ public class BagContract {
         public static final String COLUMN_COORD_LONG = "coord_long";
         // TEXT FIELD: picture of the item - we are storing
         public static final String COLUMN_DRAWABLE_NAME = "bag_res_name";
+        // Int Field : storing the code for which type of image to use. 0 = none , 1 = image , 2 = icon
+        public static final String COLUMN_IMAGE_CODE = "bag_image_code";
+        // Blob Field: storing a blob for image
+        public static final String COLUMN_BLOB_IMAGE = "bag_image_blob";
 
 
         public static final Uri CONTENT_URI =
@@ -115,12 +122,15 @@ public class BagContract {
          * Builder Function for creating content values to Insert into the BAG table
          * @return Content Values
          */
-        public static ContentValues createContentValues(String name, String drawableName,double lat, double lng) {
+        public static ContentValues createContentValues
+                (String name, String drawableName,double lat, double lng, int imageCode,byte[] imageBlob) {
             ContentValues BagColumns = new ContentValues();
             BagColumns.put(BagEntry.COLUMN_NAME,name);
             BagColumns.put(BagEntry.COLUMN_COORD_LAT,lat);
             BagColumns.put(BagEntry.COLUMN_COORD_LONG,lng);
             BagColumns.put(BagEntry.COLUMN_DRAWABLE_NAME,drawableName);
+            BagColumns.put(BagEntry.COLUMN_IMAGE_CODE,imageCode);
+            BagColumns.put(BagEntry.COLUMN_BLOB_IMAGE,imageBlob);
             return BagColumns;
         }
     }

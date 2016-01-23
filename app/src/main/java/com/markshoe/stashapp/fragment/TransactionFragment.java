@@ -1,6 +1,7 @@
 package com.markshoe.stashapp.fragment;
 
 
+import android.animation.LayoutTransition;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,6 +31,9 @@ public class TransactionFragment extends Fragment implements TransactionAdapter.
     private RecyclerView mRecyclerView;
     private RecyclerViewMaterialAdapter mAdapter;
     private List<Transaction> mContentItems = new ArrayList<>();
+
+    String[] x = {"Tuesday Jan 5th","Monday Jan 4th","Sunday Jan 3th","Friday Jan 1st","Monday Dec 27th","Thursday Dec 22nd","Tuesday Dec 20nd"};
+    int global = 0;
 
     public static TransactionFragment newInstance() {
         return new TransactionFragment();
@@ -64,16 +68,17 @@ public class TransactionFragment extends Fragment implements TransactionAdapter.
         for(int i=0 ; i < 100; i++){
             int drawableSeed= rand.nextInt((bagDrawableAndName.length - 1) + 1) + 0;
             lt.add(new Transaction((int)bagDrawableAndName[drawableSeed][0],(String)bagDrawableAndName[drawableSeed][1],
-                    "Thursday June 10th","23.128","21.328",createRandomItemTransactionList(1,10),1));
+                    x[global],"23.128","21.328",createRandomItemTransactionList(1,6),1));
+            global++;
+            global = global%(x.length);
         }
+
         return lt;
     }
 
     Object[][] bagDrawableAndName= {
-            {R.drawable.dufflebag, "Dufflebag"},
-            {R.drawable.backpack,"Main Backpack"},
-            {R.drawable.computerbag,"Computer bag"},
-            {R.drawable.luggage,"Luggage"}
+            {R.drawable.duffle_bag_real, "Dufflebag"},
+            {R.drawable.black_backpack,"Main Backpack"}
     };
 
 

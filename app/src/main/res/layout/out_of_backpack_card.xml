@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_margin="5dp"
     android:id="@+id/backpack_card"
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
     android:layout_width="match_parent"
-    android:layout_height="280dp"
+    android:layout_height="205dp"
     android:background="@drawable/backpack_background_white"
     android:orientation="vertical">
 
@@ -22,7 +24,7 @@
             android:fontFamily="sans-serif-thin"
             android:textStyle="normal"
             android:textColor="@color/white"
-            android:text="Unassigned items"
+            android:text="Sidelined items"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/backpack_name" />
@@ -33,7 +35,7 @@
             android:id="@+id/out_of_bp_overflow_button"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="40dp">
 
             <ImageView
                 android:layout_gravity="center"
@@ -47,26 +49,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/bag_frame"
-            android:paddingTop="10dp"
-            android:layout_alignParentTop="true"
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:layout_marginBottom="46dp">
-
-            <ImageView
-                android:id="@+id/bag_icon"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/out_of_bag_map_image" />
-
-        </FrameLayout>
-
-
         <TextView
-            android:paddingTop="5dp"
+            android:paddingTop="1dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="13sp"
@@ -84,13 +68,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:padding="10dp"
-            android:fontFamily="sans-serif"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="5dp"
+            android:fontFamily="sans-serif-light"
             android:textStyle="bold"
-            android:textColor="@color/primary_dark"
+            android:textColor="@color/primary_darker"
             android:text="View Items and Locations"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true" />
+
+        <FrameLayout
+            android:id="@+id/bag_frame"
+            android:layout_above="@id/item_info_text"
+            android:layout_width="match_parent"
+            android:layout_height="105dp">
+
+            <ImageView
+                android:id="@+id/bag_icon"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/newer_stash_map" />
+
+        </FrameLayout>
+
 
 
     </RelativeLayout>

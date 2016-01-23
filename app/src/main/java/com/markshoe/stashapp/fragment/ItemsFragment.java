@@ -18,9 +18,7 @@ import android.support.v4.app.LoaderManager;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.markshoe.stashapp.BackpackCardAdapter;
-import com.markshoe.stashapp.BackpackContentsActivity;
-import com.markshoe.stashapp.CustomViews.HighlightedDrawable;
-import com.markshoe.stashapp.ItemDetailsActivity;
+import com.markshoe.stashapp.ActivityBackpackContents;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.markshoe.stashapp.R;
 import com.markshoe.stashapp.data.BagContract;
@@ -29,14 +27,15 @@ import com.markshoe.stashapp.data.BagContract;
 /**
  * Created by shoe on 15-06-09.
  */
-public class ItemsFragment extends Fragment implements BackpackCardAdapter.BagListener, LoaderManager.LoaderCallbacks<Cursor> {
+public class ItemsFragment extends Fragment
+        implements BackpackCardAdapter.BagListener, LoaderManager.LoaderCallbacks<Cursor> {
     final String LOG_TAG = this.getClass().getSimpleName();
-    int ITEMS_LOADER = 0;
+    final int ITEMS_LOADER = 0;
     LinearLayout mBackpackContainer;
     ObservableScrollView mScrollView;
     BackpackCardAdapter cardAdapter;
     MaterialViewPager mViewPager;
-
+    Cursor mData ;
 
     public static ItemsFragment newInstance() {
         return new ItemsFragment();
@@ -62,7 +61,7 @@ public class ItemsFragment extends Fragment implements BackpackCardAdapter.BagLi
 
         int viewId = v.getId();
         if (viewId ==R.id.view_contents_button){
-            Intent backpackContentsActivity = new Intent(getActivity(), BackpackContentsActivity.class);
+            Intent backpackContentsActivity = new Intent(getActivity(), ActivityBackpackContents.class);
             backpackContentsActivity.putExtra("BACKPACK_ID", bagId);
             backpackContentsActivity.putExtra("BAG_NAME", bagName);
             startActivity(backpackContentsActivity);
@@ -100,13 +99,20 @@ public class ItemsFragment extends Fragment implements BackpackCardAdapter.BagLi
                 null);
     }
     @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        cardAdapter.updateCursor(cursor);
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor data) {
+        if (mData == data) return;
+        mData = data;
+        cardAdapter.updateCursor(data);
 //        cardAdapter.updateCursor(cursor);
     }
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        cardAdapter.updateCursor(null);
+        switch (cursorLoader.getId())
+        {
+            case ITEMS_LOADER:
+                cardAdapter.updateCursor(null);
+                break;
+        }
     }
 
     /*
